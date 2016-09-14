@@ -9,8 +9,11 @@ class ContactList(list):
 
     def longest_name(self):
         s = {i.name: len(i.name) for i in self}
-        mylist = sorted(s, key=s.items(), reverse=True)[0]
-        return mylist
+        try:
+            mylist = sorted(s)[0]
+            return mylist
+        except:
+            return None
 
 
 class Contact:
@@ -23,13 +26,13 @@ class Contact:
 
     @classmethod
     def reset_contacts(cls):
-        cls.all_contacts = []
-        return cls.all_contacts
+        cls.all_contacts.clear()
 
 
 class Supplier(Contact):
     all_orders = {}
 
     def order(self, string):
-        new = {self.name: string}
+        new = {self.email: string}
         Supplier.all_orders.update(new)
+        print (Supplier.all_orders)
